@@ -1,3 +1,5 @@
+package vanCoffee;
+
 import java.io.IOException;
 
 public class App {
@@ -27,27 +29,30 @@ public class App {
         userViewService.showDownload("ПАКУВАННЯ");
         userViewService.showDownload("НА СКЛАД ");
         userViewService.showMessage("Дякуємо за очікування!");
+        userViewService.anyKeyInput();
         //створюємо об'єкти, призначаємо параметри ціни, ваги тощо.
     }
 
     private void setupVanParameters() {
         userViewService.cleanConsole();
         userViewService.showMessage("Ласкаво просимо на сторінку команії 'CoffeeOptTorg'!");
-        var sum = userViewService.getUserInput("Введіть суму депозиту на яку бажаєте здійснити закупівлю (грн):");
-        var weight = userViewService.getUserInput("Введіть вантажопідйомність вашого автомобіля (кг):");
-        var capacity = userViewService.getUserInput("Введіть об'єм вашого автомобіля (ящ):");
+        int sum = userViewService.getUserInput("Введіть суму депозиту на яку бажаєте здійснити закупівлю (грн):");
+        int weight = userViewService.getUserInput("Введіть вантажопідйомність вашого автомобіля (кг):");
+        int capacity = userViewService.getUserInput("Введіть об'єм вашого автомобіля (ящ):");
         userViewService.cleanConsole();
         userViewService.showMessage("Ваш депозит: " + sum + "   Залишок ваги: " + weight + "   Залишок об'єму: " + capacity);
+        userViewService.anyKeyInput();
     }
 
     private void coffeeSales() {
         //Виводимо шапку з залишками
         // Виводимо шапку таблиці
         //Виводимо таблицю відсортованих видів з цінами
-        var art = userViewService.getUserInput("Введіть артикул вибраного товару");
-        var quantity = userViewService.getUserInput("Введіть кількість ящиків");
+        int art = userViewService.getUserInput("Введіть артикул вибраного товару");
+        int quantity = userViewService.getUserInput("Введіть кількість ящиків");
         userViewService.showMessage("Ви придбали " + art + " в кількості" + quantity + "ящиків на суму:");
         //цикл поки sum != 0
+        userViewService.anyKeyInput();
     }
 
     private void productSearch() {
@@ -59,6 +64,7 @@ public class App {
         userViewService.showMessage("Ви придбали " + "sort" + type + "кави в кількості та на суму");
         // кінець циклу
         userViewService.showMessage("Дякуємо за покупку!");
+        userViewService.anyKeyInput();
     }
 
     public void setUserViewService(UserViewService userViewService) {

@@ -1,4 +1,4 @@
-import org.junit.rules.Timeout;
+package vanCoffee;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -30,21 +30,32 @@ public class UserViewService {
 
     public int getUserInput(String message) {
         System.out.println(message);
-        int i = Integer.parseInt(scanner.nextLine());
+        int i = Integer.parseInt(scanner.next());
         return i;
     }
+
     public void showDownload(String message) throws InterruptedException {
         System.out.printf(message);
         int i = 0;
-        while (i<30){
+        while (i < 30) {
             System.out.printf(".");
-            TimeUnit.MILLISECONDS.sleep(50);
+            TimeUnit.MILLISECONDS.sleep(1);
             i++;
         }
         System.out.printf(" OK\n");
     }
+
     public void cleanConsole() {
         System.out.printf("\n\n\n\n\n\n\n\n\n\n");
     }
+
+    public void anyKeyInput() {
+        System.out.println("Натисніть будь-яку кнопку для продовження");
+        scanner.next();
+
+
+    }
 }
+
+
 

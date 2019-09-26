@@ -1,9 +1,13 @@
 public abstract class Coffee {
-    int price;
+    int id;
+    double price;
     int weight;
     int capacity;
+    String name;
+    String type;
+    double correlation;
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -15,7 +19,7 @@ public abstract class Coffee {
         return capacity;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
