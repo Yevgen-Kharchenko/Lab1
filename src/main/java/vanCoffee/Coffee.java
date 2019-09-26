@@ -1,11 +1,12 @@
+package vanCoffee;
+
 public abstract class Coffee {
-    int id;
-    double price;
-    int weight;
-    int capacity;
-    String name;
-    String type;
-    double correlation;
+    protected int id;
+    protected double price;
+    protected int weight;
+    protected CoffeeSort name;
+    protected CoffeeType type;
+
 
     public double getPrice() {
         return price;
@@ -15,11 +16,7 @@ public abstract class Coffee {
         return weight;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setPrice(double price) {
+       public void setPrice(double price) {
         this.price = price;
     }
 
@@ -27,7 +24,27 @@ public abstract class Coffee {
         this.weight = weight;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public int getId() {
+        return id;
+    }
+
+    public CoffeeSort getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
