@@ -1,4 +1,4 @@
-package vanCoffee;
+package vancoffee.service;
 
 import java.util.concurrent.TimeUnit;
 

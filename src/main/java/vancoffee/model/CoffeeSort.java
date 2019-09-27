@@ -1,4 +1,4 @@
-package vanCoffee;
+package vancoffee.model;
 
 public enum CoffeeSort {
     ARABICA("Арабіка", 1),

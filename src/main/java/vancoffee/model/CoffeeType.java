@@ -1,4 +1,4 @@
-package vanCoffee;
+package vancoffee.model;
 
 public enum CoffeeType {
     BEANS("Зернова", 1, 1d),

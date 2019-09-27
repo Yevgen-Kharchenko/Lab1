@@ -1,5 +1,11 @@
-package vanCoffee;
+package vancoffee;
 
+
+import vancoffee.model.Coffee;
+import vancoffee.model.Stock;
+import vancoffee.model.Van;
+import vancoffee.service.*;
+import vancoffee.service.impl.DownloadVanServiceImpl;
 
 public class App {
     private UserViewService userViewService;
@@ -9,14 +15,17 @@ public class App {
     private SearchService searchService;
     private SortService sortService;
 
+    private Van van;
+    private Stock stock = new Stock();
+
 
     public static void main(String[] args) throws InterruptedException {
         App app = new App();
         app.setUserViewService(new UserViewService());
         app.setUserInputService(new UserInputService());
+        app.setDownloadVanService(new DownloadVanServiceImpl());
 
 
-        app.setupPrice();
         app.setupVanParameters();
         app.coffeeSales();
         app.productSearch();
@@ -25,35 +34,14 @@ public class App {
     }
 
 
-    private void setupPrice() throws InterruptedException {
-        System.out.println(downloadVanService.getCapacity());
-        userViewService.showMessage("УВАГА! АДМІНІСТРАТИВНА СТОРІНКА! ВСТАНОВЛЮЄМО ПРОДАЖНІ ЦІНИ!");
-        int price = userInputService.getUserInput("Введіть ціну 1 кг кави сорту " + "Aрабіка");
-        /*тут повинен бути цикл щоб призначити ціну всім сортам*/
-        userViewService.showMessage("ОЧІКУЙТЕ! ЙДЕ ОБРОБКА ДАНИХ!");
-        userViewService.showDownload("ДОСТАВКА ");
-        userViewService.showDownload("ОБЖАРКА  ");
-        userViewService.showDownload("ПОМОЛ    ");
-        userViewService.showDownload("ПАКУВАННЯ");
-        userViewService.showDownload("НА СКЛАД ");
-        userViewService.showMessage("Дякуємо за очікування!");
-        userInputService.anyKeyInput();
-
-        //створюємо об'єкти, призначаємо параметри ціни, ваги тощо.
-    }
-
     private void setupVanParameters() {
-        userViewService.cleanConsole();
         userViewService.showMessage("Ласкаво просимо на сторінку команії 'CoffeeOptTorg'!");
-
         int weight = userInputService.getUserInput("Введіть вантажопідйомність вашого автомобіля (кг):");
         int capacity = userInputService.getUserInput("Введіть об'єм вашого автомобіля (ящ):");
         double sum = userInputService.getUserInput("Введіть суму депозиту на яку бажаєте здійснити закупівлю (грн):");
-  //      downloadVanService.createVan(sum, weight, capacity);
-        userViewService.cleanConsole();
-//        userViewService.showMessage("Ваш депозит: " + downloadVanService.getDeposit() +
-//                "   Залишок ваги: " + downloadVanService.getCarrying() +
-//                "   Залишок об'єму: " + downloadVanService.getCapacity());
+        this.van = downloadVanService.createVan(weight, capacity);
+        downloadVanService.setDeposit(van, sum);
+
         userInputService.anyKeyInput();
     }
 
@@ -61,14 +49,25 @@ public class App {
         //Виводимо шапку з залишками
         // Виводимо шапку таблиці
         //Виводимо таблицю відсортованих видів з цінами
+
+        for (Coffee coffee : stock.getProducts()) {
+            System.out.println(coffee);
+        }
         int art = userInputService.getUserInput("Введіть артикул вибраного товару");
-        double quantity = userInputService.getUserInput("Введіть кількість ящиків");
-//        downloadVanService.setNewDeposit(quantity);
-        userViewService.showMessage("Ви придбали " + art + " в кількості" + quantity + "ящиків на суму:");
-        //цикл поки sum != 0
-        userViewService.showMessage("Ваш депозит: " + downloadVanService.getDeposit() +
-                "   Залишок ваги: " + downloadVanService.getCarrying() +
-                "   Залишок об'єму: " + downloadVanService.getCapacity());
+        int amount = userInputService.getUserInput("Введіть кількість ящиків");
+
+
+        try {
+            downloadVanService.downloadGood(van, stock.getProductByArticle(art), amount);
+        } catch (RuntimeException e) {
+            userViewService.showMessage(e.getMessage());
+        }
+
+//        userViewService.showMessage("Ви придбали " + art + " в кількості" + quantity + "ящиків на суму:");
+//        //цикл поки sum != 0
+//        userViewService.showMessage("Ваш депозит: " + downloadVanService1.getDeposit() +
+//                "   Залишок ваги: " + downloadVanService1.getCarrying() +
+//                "   Залишок об'єму: " + downloadVanService1.getCapacity());
         userInputService.anyKeyInput();
     }
 
