@@ -17,7 +17,9 @@ public class UserViewService {
     }
 
     public void headInTable(){
+        lineInTable(60);
         System.out.println("| Арт |   Сорт   |      Тип кави     |Вага (кг)|Ціна (грн)|");
+        lineInTable(60);
     }
 
 
@@ -39,6 +41,8 @@ public class UserViewService {
     public void showBalances(int weight,int capacity,double deposit){
         System.out.printf("Ліміт ваги %18d кг.\nЛіміт об'єму %16d ящ.\nЛіміт коштів %15s грн.\n", weight,capacity,deposit);
     }
+
+
 
 
 }

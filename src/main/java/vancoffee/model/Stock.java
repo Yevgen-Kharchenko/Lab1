@@ -30,14 +30,11 @@ public class Stock {
         Collections.sort(products, (o1, o2) -> (int) (o1.getCorrelation() * 100) - (int) (o2.getCorrelation() * 100));
     }
 
-    public Coffee getProductByArticle(int art) {
-        return products.get(art - 1);
-    }
 
-    public List<Coffee> getProductByArticle2(int art) {
+    public Coffee getProductByArticle(int art) {
         for (Coffee coffee : products) {
             if (art == coffee.getArt()) {
-                return products;
+                return coffee;
             }
         }
         throw new NoItemSpecifiedException(art);
@@ -45,5 +42,13 @@ public class Stock {
 
     public List<Coffee> getProducts() {
         return products;
+    }
+    public String getNameByArticle(int art) {
+        for (Coffee coffee : products) {
+            if (art == coffee.getArt()) {
+                return coffee.getName()+" "+coffee.getType();
+            }
+        }
+        throw new NoItemSpecifiedException(art);
     }
 }

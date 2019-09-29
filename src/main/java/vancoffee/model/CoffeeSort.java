@@ -22,6 +22,6 @@ public enum CoffeeSort {
     }
 
      public String toString() {
-        return name;
+         return name;
     }
 }

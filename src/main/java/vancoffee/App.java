@@ -1,9 +1,7 @@
 package vancoffee;
 
 
-import vancoffee.model.Coffee;
-import vancoffee.model.Stock;
-import vancoffee.model.Van;
+import vancoffee.model.*;
 import vancoffee.service.*;
 import vancoffee.service.impl.DownloadVanServiceImpl;
 
@@ -13,6 +11,7 @@ public class App {
     private DownloadVanService downloadVanService;
     private Van van;
 
+
     private Stock stock = new Stock();
 
 
@@ -21,6 +20,8 @@ public class App {
         app.setUserViewService(new UserViewService());
         app.setUserInputService(new UserInputService());
         app.setDownloadVanService(new DownloadVanServiceImpl());
+
+        System.out.println();
 
 
         app.setupVanParameters();
@@ -33,7 +34,6 @@ public class App {
 
     private void setupVanParameters() {
         userViewService.showMessage("Ласкаво просимо на сторінку команії 'CoffeeOptTorg'!");
-
         int weight = userInputService.getUserInput("Введіть вантажопідйомність вашого автомобіля (кг):");
         userViewService.showMessage("Введіть об'єм вашого автомобіля (ящ):");
         int capacity = userInputService.getUserInput("(рекомендовано " + weight / 10 + " - " + weight / 7 + ")");
@@ -50,27 +50,27 @@ public class App {
             userViewService.cleanConsole();
             userViewService.showBalances(van.getFreeWeight(), van.getFreeCapacity(), van.getPurchase().getBalance());
             userViewService.showMessage("Товар відсортований по співвідношенню ціни до ваги");
-            userViewService.lineInTable(60);
+
+            /* sort table*/
             userViewService.headInTable();
-            userViewService.lineInTable(60);
-            /* виводимо табличку з відсортованими товарами*/
             for (Coffee coffee : stock.getProducts()) {
                 System.out.println(coffee);
                 userViewService.lineInTable(60);
             }
 
             int art = userInputService.getUserInput("Введіть артикул вибраного товару:");
-//                    System.out.println(stock.getProductByArticle(art));
+            userViewService.headInTable();
+            System.out.println(stock.getProductByArticle(art));
+            userViewService.lineInTable(60);
             int amount = userInputService.getUserInput("Введіть кількість ящиків:");
-            /*робимо продаж*/
+            /*sale*/
             try {
                 downloadVanService.downloadGood(van, stock.getProductByArticle(art), amount);// не вірно вибраний товар
             } catch (RuntimeException e) {
                 userViewService.showMessage(e.getMessage());
             }
-            /* вивести товар, кількість і загальну суму*/
-            userViewService.showMessage("Ви придбали " + art + " в кількості " +amount+ " ящиків на суму: "+van.getPurchase().getLoadedPrice());
-            /*перевіряємо можливість подальшого продажу*/
+            userViewService.showMessage("Ви придбали " + stock.getNameByArticle(art) + " в кількості " + amount + " ящ. на суму: " + van.getPurchase().getLoadedPrice() + " грн.");
+
             downloadVanService.validateBalances(van);
             /*програма переривається, а повинна перейти на наступний рівень*/
         }
@@ -78,10 +78,13 @@ public class App {
 
     private void productSearch() throws InterruptedException {
         while (userInputService.showQuestion("Бажаєте знайти товар в своїй корзині?")) {
-            int sort = userInputService.getUserInput("Введіть сорт кави який бажаєте знайти:"+"/*вивести список сортів enam*/");
-            /*відповідно вибраному sort id будемо шукати в списку покупок*/
-            int type = userInputService.getUserInput("Введіть тип кави який бажаєте знайти:"+"/*вивести список типів enam*/");
-            /*відповідно вибраному type id будемо шукати в списку покупок*/
+            System.out.printf("%-8s - 1\n%-8s - 2\n%s - 3\n", CoffeeSort.ARABICA, CoffeeSort.ROBUSTA, CoffeeSort.LIBERICA);
+            int sort = userInputService.getUserInput("Введіть сорт кави який бажаєте знайти:");
+            /*потрібна валідація на правильне введення*/
+            System.out.printf("%-17s - 1\n%-17s - 2\n%-17s - 3\n%s - 4\n", CoffeeType.BEANS, CoffeeType.GROUND, CoffeeType.JAR, CoffeeType.STICK);
+            int type = userInputService.getUserInput("Введіть тип кави який бажаєте знайти:");
+            /*потрібна валідація на правильне введення*/
+            /*відповідно вибраному  будемо шукати в списку покупок*/
             // здійснюємо пошук за параметрами, якщо якогось параметра немає то виводим декілька товарів за одним параметром
             userViewService.showDownload("Зачекайте, йде пошук");
             userViewService.showMessage("Ви придбали " + "sort" + type + "кави в кількості та на суму");
