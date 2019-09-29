@@ -2,9 +2,9 @@ package vancoffee.model;
 
 public enum CoffeeType {
     BEANS("Зернова", 1, 1d),
-    GROUND("Мелена", 2,1.2d),
+    GROUND("Мелена", 2, 1.2d),
     JAR("Розчинна в банці", 3, 1.3d),
-    STICK("Розчинна в пакеті", 4,1.4d);
+    STICK("Розчинна в пакеті", 4, 1.4d);
 
     private final String name;
     private final int id;
@@ -20,15 +20,15 @@ public enum CoffeeType {
         return this.name;
     }
 
-       public int getTypeId() {
+    public int getTypeId() {
         return this.id;
     }
+
     public double getTypeCoef() {
         return this.coef;
     }
-
-      public String toString() {
-        String s= "Type name is: "+ name;
-        return s;
+    public String toString() {
+        return name;
     }
 }
+

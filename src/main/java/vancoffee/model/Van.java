@@ -33,7 +33,7 @@ public class Van {
     }
 
     public void setLoadedWeight(int loadedWeight) {
-        this.loadedWeight = loadedWeight;
+        this.loadedWeight += loadedWeight;
     }
 
     public int getLoadedCapacity() {
@@ -41,7 +41,7 @@ public class Van {
     }
 
     public void setLoadedCapacity(int loadedCapacity) {
-        this.loadedCapacity = loadedCapacity;
+        this.loadedCapacity += loadedCapacity;
     }
 
     public int getFreeCapacity() {

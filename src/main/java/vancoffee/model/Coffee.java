@@ -62,10 +62,6 @@ public final class Coffee {
 
     @Override
     public String toString() {
-        return "Coffee{" +
-                "art=" + art +
-                ", name=" + name.getSortName() +
-                ", type=" + type.getTypeName() +
-                '}';
+        return (String.format("| %-3s | %-8s | %-17s | %7s | %8s |", art,name, type,weight,price) ) ;
     }
 }

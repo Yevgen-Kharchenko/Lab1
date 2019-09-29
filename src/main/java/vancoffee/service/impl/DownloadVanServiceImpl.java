@@ -3,9 +3,7 @@ package vancoffee.service.impl;
 import vancoffee.model.Coffee;
 import vancoffee.model.Van;
 import vancoffee.service.DownloadVanService;
-import vancoffee.service.exceptions.NoAvailableCapacityException;
-import vancoffee.service.exceptions.NoAvailableWeightException;
-import vancoffee.service.exceptions.SmallBalanceException;
+import vancoffee.service.exceptions.*;
 
 public class DownloadVanServiceImpl implements DownloadVanService {
     @Override
@@ -23,6 +21,8 @@ public class DownloadVanServiceImpl implements DownloadVanService {
     public Van downloadGood(Van van, Coffee coffee, int amount) {
         validateDownload(van, coffee, amount);
         van.getPurchase().addGoods(coffee, amount);
+        van.setLoadedCapacity(amount);
+        van.setLoadedWeight(coffee.getWeight()*amount);
         return van;
     }
 
@@ -33,6 +33,15 @@ public class DownloadVanServiceImpl implements DownloadVanService {
             throw new NoAvailableCapacityException(coffee, amount);
         if (van.getPurchase().getBalance() < (coffee.getPrice() * amount))
             throw new SmallBalanceException(coffee, amount);
+    }
+
+    public void validateBalances(Van van) {
+        if (van.getFreeWeight() < 7)
+            throw new NoFreeWeightException();
+        if (van.getFreeCapacity() < 1)
+            throw new NoFreeCapacityException();
+        if (van.getPurchase().getBalance() < 1330)
+            throw new NoFreeBalanceException();
     }
 
 

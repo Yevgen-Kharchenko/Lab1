@@ -31,5 +31,9 @@ public class Purchase {
     public double getBalance(){
         return deposit-loadedPrice;
     }
+
+    public double getLoadedPrice() {
+        return loadedPrice;
+    }
 }
 
