@@ -10,6 +10,7 @@
     <groupId>HW</groupId>
     <artifactId>Lab1</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -27,4 +28,5 @@
         </dependency>
 
     </dependencies>
+
 </project>
