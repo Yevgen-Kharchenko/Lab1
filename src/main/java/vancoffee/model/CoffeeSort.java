@@ -17,11 +17,11 @@ public enum CoffeeSort {
         return this.name;
     }
 
-        public int getSortId() {
+    public int getSortId() {
         return this.id;
     }
 
-     public String toString() {
-         return name;
+    public String toString() {
+        return name;
     }
 }

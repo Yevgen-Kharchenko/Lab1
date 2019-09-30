@@ -1,6 +1,6 @@
 package vancoffee.model;
 
-import vancoffee.service.exceptions.NoItemSpecifiedException;
+import vancoffee.exceptions.NoItemSpecifiedException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,10 +43,11 @@ public class Stock {
     public List<Coffee> getProducts() {
         return products;
     }
+
     public String getNameByArticle(int art) {
         for (Coffee coffee : products) {
             if (art == coffee.getArt()) {
-                return coffee.getName()+" "+coffee.getType();
+                return coffee.getName() + " " + coffee.getType();
             }
         }
         throw new NoItemSpecifiedException(art);

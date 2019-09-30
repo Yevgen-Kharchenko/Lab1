@@ -24,8 +24,7 @@ public enum CoffeeType {
         return this.id;
     }
 
-       public String toString() {
+    public String toString() {
         return name;
     }
 }
-

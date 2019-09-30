@@ -16,28 +16,8 @@ public class Van {
         return purchase;
     }
 
-    public int getMaxWeight() {
-        return maxWeight;
-    }
-
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
-
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
-    }
-
-    public int getLoadedWeight() {
-        return loadedWeight;
-    }
-
     public void setLoadedWeight(int loadedWeight) {
         this.loadedWeight += loadedWeight;
-    }
-
-    public int getLoadedCapacity() {
-        return loadedCapacity;
     }
 
     public void setLoadedCapacity(int loadedCapacity) {
@@ -52,6 +32,4 @@ public class Van {
         return maxWeight - loadedWeight;
     }
 
-
 }
-

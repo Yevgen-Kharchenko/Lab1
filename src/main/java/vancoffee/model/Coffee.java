@@ -43,6 +43,14 @@ public final class Coffee {
         return type.getTypeName();
     }
 
+    public CoffeeSort getCoffeeSort() {
+        return name;
+    }
+
+    public CoffeeType getCoffeeType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,6 +70,6 @@ public final class Coffee {
 
     @Override
     public String toString() {
-        return (String.format("| %-3s | %-8s | %-17s | %7s | %8s |", art,name, type,weight,price) ) ;
+        return (String.format("| %-3s | %-8s | %-17s | %7s | %8s |", art, name, type, weight, price));
     }
 }
