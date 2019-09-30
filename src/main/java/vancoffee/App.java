@@ -58,13 +58,13 @@ public class App {
             /*sale*/
             try {
                 downloadVanService.downloadGood(van, stock.getProductByArticle(art), amount);
+                userViewService.showMessage("Ви завантажили " + stock.getNameByArticle(art) +
+                        " в кількості " + amount + " ящ. на суму: " +
+                        van.getPurchase().getLoadedPrice() + " грн.");
+                userViewService.showMessage("");
             } catch (RuntimeException e) {
                 userViewService.showMessage(e.getMessage());
             }
-            userViewService.showMessage("Ви завантажили " + stock.getNameByArticle(art) +
-                    " в кількості " + amount + " ящ. на суму: " +
-                    van.getPurchase().getLoadedPrice() + " грн.");
-            userViewService.showMessage("");
             try {
                 downloadVanService.validateBalances(van);
             } catch (RuntimeException e) {
@@ -91,12 +91,10 @@ public class App {
             userViewService.showDownload("Зачекайте, йде пошук");
             Map<Coffee, Integer> foundGoods = searchService.search(van, sort, type);
             userViewService.showFoundProductsTable(foundGoods);
-
-//            userViewService.showMessage("Ви придбали " + "sort" + type + "кави в кількості та на суму");
-
-
         }
-        userViewService.showMessage("Дякуємо за покупку!");
+        userViewService.cleanConsole();
+        userViewService.showGoodBye("Д Я К У Є М О   З А   П О К У П К У!\n Чекаємо на Вас знову!" +
+                "\n\nВалерія! Поставте мені гарну оцінку,будь ласка!");
     }
 
     private void setUserViewService(UserViewService userViewService) {

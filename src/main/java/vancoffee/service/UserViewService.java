@@ -26,18 +26,18 @@ public class UserViewService {
     }
 
     public void showDownload(String message) throws InterruptedException {
-        System.out.printf(message);
+        System.out.print(message);
         int i = 0;
         while (i < 35) {
-            System.out.printf(".");
+            System.out.print(".");
             TimeUnit.MILLISECONDS.sleep(30);
             i++;
         }
-        System.out.printf(" OK\n");
+        System.out.print(" OK\n");
     }
 
     public void cleanConsole() {
-        System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     public void showBalances(int weight, int capacity, double deposit) {
@@ -53,10 +53,24 @@ public class UserViewService {
     }
 
     public void showFoundProductsTable(Map<Coffee, Integer> goods) {
-        headInTable();
-        for (Map.Entry<Coffee, Integer> entry : goods.entrySet()) {
-            System.out.println(entry.getKey() + entry.getValue().toString());
-            lineInTable(60);
+        if (goods.size() > 0) {
+            for (Map.Entry<Coffee, Integer> entry : goods.entrySet()) {
+                headInTable();
+                System.out.println(entry.getKey());
+                System.out.printf("Ви завантажили %s ящ. на загальну суму %s\n", entry.getValue().toString(), (entry.getValue() * entry.getKey().getPrice()));
+                lineInTable(60);
+            }
+        } else {
+            System.out.println("Вибраний товар відсутній у фургоні!");
         }
+    }
+
+    public void showGoodBye(String message) throws InterruptedException {
+        char[] result = message.toCharArray();
+        for (char c : result) {
+            System.out.print(c);
+            TimeUnit.MILLISECONDS.sleep(75);
+        }
+
     }
 }
