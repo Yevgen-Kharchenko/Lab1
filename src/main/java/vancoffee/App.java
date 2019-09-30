@@ -94,7 +94,7 @@ public class App {
         }
         userViewService.cleanConsole();
         userViewService.showGoodBye("Д Я К У Є М О   З А   П О К У П К У!\n Чекаємо на Вас знову!" +
-                "\n\nВалерія! Поставте мені гарну оцінку,будь ласка!");
+                "\n\nВалерія! Поставте мені гарну оцінку,будь ласка! Я дуже старався!");
     }
 
     private void setUserViewService(UserViewService userViewService) {
