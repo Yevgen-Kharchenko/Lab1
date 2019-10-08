@@ -18,12 +18,12 @@ public final class Coffee {
         this.type = type;
     }
 
-    public double getCorrelation() {
+    double getCorrelation() {
         if (weight == 0) throw new RuntimeException("Weight can't be 0");
         return price / weight;
     }
 
-    public int getArt() {
+    int getArt() {
         return art;
     }
 

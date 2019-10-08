@@ -1,5 +1,8 @@
 package vancoffee;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import vancoffee.exceptions.BaseException;
 import vancoffee.model.*;
 import vancoffee.service.DownloadVanService;
 import vancoffee.service.SearchService;
@@ -10,7 +13,9 @@ import vancoffee.service.impl.SearchServiceImpl;
 
 import java.util.Map;
 
+@SpringBootApplication
 public class App {
+
     private UserViewService userViewService;
     private UserInputService userInputService;
     private DownloadVanService downloadVanService;
@@ -19,6 +24,7 @@ public class App {
     private Stock stock = new Stock();
 
     public static void main(String[] args) throws InterruptedException {
+        SpringApplication.run(App.class, args);
         App app = new App();
         app.setUserViewService(new UserViewService());
         app.setUserInputService(new UserInputService());
@@ -45,29 +51,22 @@ public class App {
 
     private void coffeeSales() {
         while (userInputService.showQuestion("Бажаєте завантажити фургон?")) {
-            userViewService.cleanConsole();
-            userViewService.showBalances(van.getFreeWeight(), van.getFreeCapacity(), van.getPurchase().getBalance());
-            userViewService.showMessage("Товар відсортований по співвідношенню ціни до ваги");
-            /* sort table*/
-            userViewService.showAllProductsTable(stock.getProducts());
+            userViewService.showTable(van, stock);
             int art = userInputService.validateInputUserService("Введіть артикул вибраного товару:", 12);
-            userViewService.headInTable();
-            System.out.println(stock.getProductByArticle(art));
-            userViewService.lineInTable(60);
+            userViewService.showSelectionTable(stock, art);
             int amount = userInputService.validateInputUserService("Введіть кількість ящиків:", van.getFreeCapacity());
-            /*sale*/
             try {
                 downloadVanService.downloadGood(van, stock.getProductByArticle(art), amount);
                 userViewService.showMessage("Ви завантажили " + stock.getNameByArticle(art) +
                         " в кількості " + amount + " ящ. на суму: " +
                         van.getPurchase().getLoadedPrice() + " грн.");
                 userViewService.showMessage("");
-            } catch (RuntimeException e) {
+            } catch (BaseException e) {
                 userViewService.showMessage(e.getMessage());
             }
             try {
                 downloadVanService.validateBalances(van);
-            } catch (RuntimeException e) {
+            } catch (BaseException e) {
                 userViewService.showMessage(e.getMessage());
                 break;
             }

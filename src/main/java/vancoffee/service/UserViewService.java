@@ -1,6 +1,8 @@
 package vancoffee.service;
 
 import vancoffee.model.Coffee;
+import vancoffee.model.Stock;
+import vancoffee.model.Van;
 
 import java.util.List;
 import java.util.Map;
@@ -72,5 +74,18 @@ public class UserViewService {
             TimeUnit.MILLISECONDS.sleep(75);
         }
 
+    }
+
+    public void showTable(Van van, Stock stock) {
+        cleanConsole();
+        showBalances(van.getFreeWeight(), van.getFreeCapacity(), van.getPurchase().getBalance());
+        showMessage("Товар відсортований по співвідношенню ціни до ваги");
+        showAllProductsTable(stock.getProducts());
+    }
+
+    public void showSelectionTable(Stock stock, int art) {
+        headInTable();
+        showMessage(stock.getProductByArticle(art).toString());
+        lineInTable(60);
     }
 }
