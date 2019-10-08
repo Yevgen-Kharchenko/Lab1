@@ -4,8 +4,11 @@ import vancoffee.model.Coffee;
 import vancoffee.model.Van;
 import vancoffee.service.DownloadVanService;
 import vancoffee.exceptions.*;
+import org.apache.log4j.Logger;
 
 public class DownloadVanServiceImpl implements DownloadVanService {
+    private static final Logger LOG = Logger.getLogger(DownloadVanServiceImpl.class);
+
     @Override
     public Van createVan(int maxWeight, int maxCapacity) {
         return new Van(maxWeight, maxCapacity);
@@ -18,6 +21,7 @@ public class DownloadVanServiceImpl implements DownloadVanService {
 
     @Override
     public void downloadGood(Van van, Coffee coffee, int amount) {
+        LOG.debug("Amount downloadGood is " + amount);
         validateDownload(van, coffee, amount);
         van.getPurchase().addGoods(coffee, amount);
         van.setLoadedCapacity(amount);
@@ -25,6 +29,7 @@ public class DownloadVanServiceImpl implements DownloadVanService {
     }
 
     private void validateDownload(Van van, Coffee coffee, int amount) {
+        LOG.debug("Amount validateDownload is " + amount);
         if (van.getFreeWeight() < (coffee.getWeight() * amount))
             throw new NoAvailableWeightException(coffee, amount);
         if (van.getFreeCapacity() < amount)
@@ -41,4 +46,6 @@ public class DownloadVanServiceImpl implements DownloadVanService {
         if (van.getPurchase().getBalance() < 1330)
             throw new NoFreeBalanceException();
     }
+
+
 }

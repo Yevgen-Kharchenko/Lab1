@@ -11,11 +11,11 @@ public class Purchase {
     Purchase() {
     }
 
-       public void setDeposit(double deposit) {
+    public void setDeposit(double deposit) {
         this.deposit = deposit;
     }
 
-       public void addGoods(Coffee coffee, int amount) {
+    public void addGoods(Coffee coffee, int amount) {
         Integer storedAmount = goods.get(coffee);
         if (storedAmount == null) {
             goods.put(coffee, amount);
