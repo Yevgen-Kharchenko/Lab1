@@ -3,7 +3,6 @@ package vancoffee.model;
 import vancoffee.exceptions.NoItemSpecifiedException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Stock {
@@ -27,7 +26,7 @@ public class Stock {
     );
 
     public Stock() {
-        Collections.sort(products, (o1, o2) -> (int) (o1.getCorrelation() * 100) - (int) (o2.getCorrelation() * 100));
+        products.sort((o1, o2) -> (int) (o1.getCorrelation() * 100) - (int) (o2.getCorrelation() * 100));
     }
 
 
