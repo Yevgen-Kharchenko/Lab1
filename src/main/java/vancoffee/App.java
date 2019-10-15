@@ -48,14 +48,13 @@ public class App {
             userViewService.cleanConsole();
             userViewService.showBalances(van.getFreeWeight(), van.getFreeCapacity(), van.getPurchase().getBalance());
             userViewService.showMessage("Товар відсортований по співвідношенню ціни до ваги");
-            /* sort table*/
             userViewService.showAllProductsTable(stock.getProducts());
             int art = userInputService.validateInputUserService("Введіть артикул вибраного товару:", 12);
             userViewService.headInTable();
             System.out.println(stock.getProductByArticle(art));
             userViewService.lineInTable(60);
             int amount = userInputService.validateInputUserService("Введіть кількість ящиків:", van.getFreeCapacity());
-            /*sale*/
+
             try {
                 downloadVanService.downloadGood(van, stock.getProductByArticle(art), amount);
                 userViewService.showMessage("Ви завантажили " + stock.getNameByArticle(art) +
@@ -93,8 +92,7 @@ public class App {
             userViewService.showFoundProductsTable(foundGoods);
         }
         userViewService.cleanConsole();
-        userViewService.showGoodBye("Д Я К У Є М О   З А   П О К У П К У!\n Чекаємо на Вас знову!" +
-                "\n\nВалерія! Поставте мені гарну оцінку,будь ласка!");
+        userViewService.showGoodBye("Д Я К У Є М О   З А   П О К У П К У!\n Чекаємо на Вас знову!");
     }
 
     private void setUserViewService(UserViewService userViewService) {

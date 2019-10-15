@@ -1,9 +1,12 @@
 package vancoffee.service;
 
+import org.apache.log4j.Logger;
+import vancoffee.exceptions.NoAvailableCapacityException;
+
 import java.util.Scanner;
 
 public class UserInputService {
-
+    private static final Logger LOG = Logger.getLogger(UserInputService.class);
     private Scanner scanner = new Scanner(System.in);
     private String error = " ВІДПОВІДЬ НЕ ПРАВИЛЬНА!\nБудьте уважнішим при введені!\n";
 
@@ -19,6 +22,7 @@ public class UserInputService {
                 return false;
             } else {
                 System.out.print(error);
+                LOG.debug("User input: " + answer);
             }
         }
     }
@@ -32,6 +36,7 @@ public class UserInputService {
                 break;
             } else {
                 System.out.print(error);
+                LOG.debug("User input: " + i);
             }
         }
         return i;
@@ -45,6 +50,7 @@ public class UserInputService {
                 break;
             } else {
                 System.out.print(error);
+                LOG.debug("User input: " + option);
             }
         }
         return value;
