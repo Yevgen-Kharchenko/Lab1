@@ -1,5 +1,9 @@
 package vancoffee;
 
+import vancoffee.dao.CoffeeSortDao;
+import vancoffee.dao.CoffeeTypeDao;
+import vancoffee.dao.ProductsDao;
+import vancoffee.entity.Products;
 import vancoffee.model.*;
 import vancoffee.service.DownloadVanService;
 import vancoffee.service.SearchService;
@@ -8,6 +12,7 @@ import vancoffee.service.UserViewService;
 import vancoffee.service.impl.DownloadVanServiceImpl;
 import vancoffee.service.impl.SearchServiceImpl;
 
+import java.util.List;
 import java.util.Map;
 
 public class App {
@@ -19,6 +24,24 @@ public class App {
     private Stock stock = new Stock();
 
     public static void main(String[] args) throws InterruptedException {
+        CoffeeSortDao coffeeSortDao = new CoffeeSortDao();
+        CoffeeTypeDao coffeeTypeDao = new CoffeeTypeDao();
+        ProductsDao productsDao = new ProductsDao();
+
+        List<vancoffee.entity.CoffeeSort> coffeeSorts = coffeeSortDao.getAll();
+
+        System.out.println("All coffee sorts");
+        System.out.println(coffeeSorts);
+
+        List<vancoffee.entity.CoffeeType> coffeeTypes = coffeeTypeDao.getAll();
+        System.out.println("All coffee types");
+        System.out.println(coffeeTypes);
+
+        List<Products> products = productsDao.getAll();
+        System.out.println("All products");
+        System.out.println(products);
+
+
         App app = new App();
         app.setUserViewService(new UserViewService());
         app.setUserInputService(new UserInputService());

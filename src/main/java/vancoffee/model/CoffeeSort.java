@@ -5,6 +5,7 @@ public enum CoffeeSort {
     ROBUSTA("Робуста", 2),
     LIBERICA("Ліберіка", 3);
 
+
     private final String name;
     private final int id;
 

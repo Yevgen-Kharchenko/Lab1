@@ -6,6 +6,8 @@ public enum CoffeeType {
     JAR("Розчинна в банці", 3),
     STICK("Розчинна в пакеті", 4);
 
+
+
     private final String name;
     private final int id;
 
