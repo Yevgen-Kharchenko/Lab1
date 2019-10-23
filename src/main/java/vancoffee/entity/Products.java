@@ -3,9 +3,17 @@ package vancoffee.entity;
 public class Products {
     private int id;
     private int art;
-    private int sortId;
+    private int sort_id;
     private int type_id;
     private double price;
+
+    public Products(int id, int art, int sort_id, int type_id, double price) {
+        this.id = id;
+        this.art = art;
+        this.sort_id = sort_id;
+        this.type_id = type_id;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
@@ -23,12 +31,12 @@ public class Products {
         this.art = art;
     }
 
-    public int getSortId() {
-        return sortId;
+    public int getSort_id() {
+        return sort_id;
     }
 
-    public void setSortId(int sortId) {
-        this.sortId = sortId;
+    public void setSort_id(int sort_id) {
+        this.sort_id = sort_id;
     }
 
     public int getType_id() {

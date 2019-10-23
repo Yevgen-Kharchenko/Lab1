@@ -4,6 +4,11 @@ public class CoffeeSort {
     private int id;
     private String sort;
 
+    public CoffeeSort(int id, String sort) {
+        this.id = id;
+        this.sort = sort;
+    }
+
     public int getId() {
         return id;
     }
